@@ -34,6 +34,7 @@ typedef struct _jqueue_st {
 jqueue_t    jqueue_new(void);
 void        jqueue_free(jqueue_t q);
 void        jqueue_push(jqueue_t q, void *data, int pri);
+void        jqueue_remove(jqueue_t q, void *data);
 void        *jqueue_pull(jqueue_t q);
 int         jqueue_size(jqueue_t q);
 time_t      jqueue_age(jqueue_t q);

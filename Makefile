@@ -1,12 +1,14 @@
-timerdemo: timerdemo.o timer_engine.o jqueue.o
-	$(CC) -o timerdemo timerdemo.o timer_engine.o pool.o jqueue.o
+timerdemo: timerdemo.o timer_engine.o jqueue.o timer_obj.o
+	$(CC) -g -o timerdemo timerdemo.o timer_engine.o pool.o jqueue.o timer_obj.o
 timerdemo.o:
-	$(CC) -c timerdemo.c
-timer_engine.o: jqueue.o
-	$(CC) -c timer_engine.c
+	$(CC) -g -c timerdemo.c
+timer_engine.o: jqueue.o timer_obj.o
+	$(CC) -g -c timer_engine.c
+timer_obj.o:
+	$(CC) -g -c timer_obj.c
 jqueue.o: pool.o
-	$(CC) -c jqueue.c
+	$(CC) -g -c jqueue.c
 pool.o:
-	$(CC) -c pool.c
+	$(CC) -g -c pool.c
 clean:
 	rm *.o timerdemo

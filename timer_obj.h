@@ -4,10 +4,14 @@
 
 #include <sys/time.h>
 
+#define KTimerIntervalUnit 500
+
+typedef int (*callback_func)(void *data,int);
+
 typedef struct timer_callback_st {
-	int mType;
+	int m_type;
 	void *data;
-	int(*mFunction)(void *aPtr, int type);
+	callback_func m_callback_func;
 }_timer_callback, *timer_callback_t;
 
 timer_callback_t new_timer_callback();
@@ -17,13 +21,15 @@ void free_timer_callback(timer_callback_t t);
 int timer_callback(timer_callback_t t);
 
 typedef struct timer_obj_st {
-	TTimeIntervalMicroSeconds32 m_Interval;
+	unsigned int m_Interval;
 	unsigned int m_cycl_tick;
 	unsigned int m_current_tick;
 	timer_callback_t mTimer_callback;
-} _timerobj, *timer_obj_t;
+} _timer_obj, *timer_obj_t;
 
-timer_obj_t new_timer_obj();
+timer_obj_t new_timer_obj(unsigned int anInterval, int type, void *data, callback_func callback);
+
+int timer_obj_tick(timer_obj_t t);
 
 void free_timer_obj(timer_obj_t t);
 

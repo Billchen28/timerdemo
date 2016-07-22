@@ -12,12 +12,7 @@ typedef struct timer_obj_st *timer_obj_t;
 typedef struct timer_engine_st {
 	jqueue_t mTimerTaskQueue;
 	int m_timer_engine_stated;
-	int m_id;
 }_timer_engine, *timer_engine_t;
-
-static int m_gobal_timer_started = 0;
-
-#define KTimerIntervalUnit 500
 
 timer_engine_t get_timer_engine();
 

@@ -74,6 +74,30 @@ void jqueue_push(jqueue_t q, void *data, int priority) {
     scan->prev = qn;
 }
 
+void jqueue_remove(jqueue_t q, void *data) {
+    assert((int) (data != NULL));
+    assert((int) (q != NULL));
+    _jqueue_node_t scan;
+    for(scan = q->back; scan != NULL; scan = scan->next) {
+        if (scan->data == data) {
+            if (scan->next != NULL) {
+                scan->next->prev = scan->prev;
+            }
+            if (scan->prev != NULL) {
+                scan->prev->next = scan->next;
+            }
+            if (scan == q->front) {
+                q->front = scan->prev;
+            }
+            if (scan == q->back) {
+                q->back = scan->next;
+            }
+            q->size--;
+            break;
+        }
+    }
+}
+
 void *jqueue_pull(jqueue_t q) {
     void *data;
     _jqueue_node_t qn;
