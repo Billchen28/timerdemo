@@ -7,6 +7,8 @@
 
 #include "jqueue.h"
 
+typedef struct timer_obj_st *timer_obj_t;
+
 typedef struct timer_engine_st {
 	jqueue_t mTimerTaskQueue;
 	int m_timer_engine_stated;
@@ -19,9 +21,9 @@ static int m_gobal_timer_started = 0;
 
 timer_engine_t get_timer_engine();
 
-void start_engine();
+void appendTimerTask(timer_obj_t t);
 
-void stop_engine();
+void cancelTimerTask(timer_obj_t t);
 
 void release_timer_engine();
 

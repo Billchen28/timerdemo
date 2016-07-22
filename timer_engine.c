@@ -18,6 +18,13 @@ void tick(int arg) {
 	}
 }
 
+void appendTimerTask(timer_obj_t t) {
+	jqueue_push(t->mTimerTaskQueue, t, 0);
+}
+
+void cancelTimerTask(timer_obj_t t) {
+}
+
 timer_engine_t get_timer_engine() {
 	if (g_timer_engine == NULL) {
 		timer_engine_t ret = malloc(sizeof(_timer_engine));
@@ -28,7 +35,7 @@ timer_engine_t get_timer_engine() {
 	return g_timer_engine;
 }
 
-void release_timer_engine(timer_engine_t t_e) {
+void release_timer_engine() {
 	if (g_timer_engine == NULL) {
 		return;
 	}
